@@ -1,0 +1,20 @@
+﻿# Use the official TensorFlow image as the base image
+FROM tensorflow/tensorflow:latest
+
+# Set up the working directory
+WORKDIR /app
+
+# Install any necessary packages
+RUN apt-get update && apt-get install -y python3-opencv
+
+# Install additional Python packages
+RUN pip3 install pillow matplotlib numpy tensorflow-object-detection-api
+
+RUN pip3 install opencv-python tensorflow-hub matplotlib
+
+# Copy the source code and image data into the container
+COPY . .
+
+# Set the default command to run when the container starts
+CMD ["python3", "detect_objects.py"]
+
